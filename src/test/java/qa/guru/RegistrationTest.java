@@ -6,18 +6,18 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class RegisterTest {
+public class RegistrationTest {
 
     @Test
     void successfulRegistrationTest() {
-        String authData = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"pistol\" }";
+        String regData = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"pistol\" }";
 
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(authData)
+                .body(regData)
                 .when()
                 .post("https://reqres.in/api/register")
                 .then()
@@ -30,14 +30,14 @@ public class RegisterTest {
 
     @Test
     void registrationWithOutEmailTest() {
-        String authData = "{ \"password\": \"pistol\" }";
+        String noneEmailData = "{ \"password\": \"pistol\" }";
 
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(authData)
+                .body(noneEmailData)
                 .when()
                 .post("https://reqres.in/api/register")
                 .then()
@@ -49,14 +49,14 @@ public class RegisterTest {
 
     @Test
     void registrationWithOutPasswordTest() {
-        String authData = "{ \"email\": \"eve.holt@reqres.in\" }";
+        String nonePasswordData = "{ \"email\": \"eve.holt@reqres.in\" }";
 
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(authData)
+                .body(nonePasswordData)
                 .when()
                 .post("https://reqres.in/api/register")
                 .then()
@@ -68,14 +68,14 @@ public class RegisterTest {
 
     @Test
     void undefinedUserRegistrationTest() {
-        String authData = "{ \"email\": \"egolikov@gmail.com\", \"password\": \"gogogo55\" }";
+        String undefinedUserData = "{ \"email\": \"egolikov@gmail.com\", \"password\": \"gogogo55\" }";
 
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(authData)
+                .body(undefinedUserData)
                 .when()
                 .post("https://reqres.in/api/register")
                 .then()
@@ -84,6 +84,4 @@ public class RegisterTest {
                 .statusCode(400)
                 .body("error", is("Note: Only defined users succeed registration"));
     }
-
-
 }
