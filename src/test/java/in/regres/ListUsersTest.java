@@ -13,10 +13,11 @@ public class ListUsersTest {
         given()
                 .log().uri()
                 .log().method()
-                .log().body()
                 .when()
                 .get("https://reqres.in/api/users?page=2")
                 .then()
+                .log().status()
+                .log().body()
                 .statusCode(200)
                 .body("page", is(2),
                         "per_page", is(6),
