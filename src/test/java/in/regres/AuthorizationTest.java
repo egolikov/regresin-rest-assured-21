@@ -1,4 +1,4 @@
-package qa.guru;
+package in.regres;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,31 +6,30 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class RegistrationTest {
+public class AuthorizationTest {
 
     @Test
-    void successfulRegistrationTest() {
-        String regData = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"pistol\" }";
+    void successfulAuthorizationTest() {
+        String authData = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"cityslicka\" }";
 
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(regData)
+                .body(authData)
                 .when()
-                .post("https://reqres.in/api/register")
+                .post("https://reqres.in/api/login")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("id", is(4),
-                        "token", is("QpwL5tke4Pnpja7X4"));
+                .body("token", is("QpwL5tke4Pnpja7X4"));
     }
 
     @Test
-    void registrationWithOutEmailTest() {
-        String noneEmailData = "{ \"password\": \"pistol\" }";
+    void authorizationWithOutEmailTest() {
+        String noneEmailData = "{ \"password\": \"cityslicka\" }";
 
         given()
                 .log().uri()
@@ -39,7 +38,7 @@ public class RegistrationTest {
                 .contentType(JSON)
                 .body(noneEmailData)
                 .when()
-                .post("https://reqres.in/api/register")
+                .post("https://reqres.in/api/login")
                 .then()
                 .log().status()
                 .log().body()
@@ -48,7 +47,7 @@ public class RegistrationTest {
     }
 
     @Test
-    void registrationWithOutPasswordTest() {
+    void authorizationWithOutPasswordTest() {
         String nonePasswordData = "{ \"email\": \"eve.holt@reqres.in\" }";
 
         given()
@@ -58,7 +57,7 @@ public class RegistrationTest {
                 .contentType(JSON)
                 .body(nonePasswordData)
                 .when()
-                .post("https://reqres.in/api/register")
+                .post("https://reqres.in/api/login")
                 .then()
                 .log().status()
                 .log().body()
@@ -67,7 +66,7 @@ public class RegistrationTest {
     }
 
     @Test
-    void undefinedUserRegistrationTest() {
+    void undefinedUserAuthorizationTest() {
         String undefinedUserData = "{ \"email\": \"egolikov@gmail.com\", \"password\": \"gogogo\" }";
 
         given()
@@ -77,11 +76,11 @@ public class RegistrationTest {
                 .contentType(JSON)
                 .body(undefinedUserData)
                 .when()
-                .post("https://reqres.in/api/register")
+                .post("https://reqres.in/api/login")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(400)
-                .body("error", is("Note: Only defined users succeed registration"));
+                .body("error", is("user not found"));
     }
 }

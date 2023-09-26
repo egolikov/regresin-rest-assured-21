@@ -1,4 +1,4 @@
-package qa.guru;
+package in.regres;
 
 import org.junit.jupiter.api.Test;
 
