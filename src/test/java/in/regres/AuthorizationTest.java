@@ -6,7 +6,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class AuthorizationTest {
+public class AuthorizationTest extends BaseTest {
 
     @Test
     void successfulAuthorizationTest() {
@@ -19,7 +19,7 @@ public class AuthorizationTest {
                 .contentType(JSON)
                 .body(authData)
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
                 .then()
                 .log().status()
                 .log().body()
@@ -38,7 +38,7 @@ public class AuthorizationTest {
                 .contentType(JSON)
                 .body(noneEmailData)
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
                 .then()
                 .log().status()
                 .log().body()
@@ -57,7 +57,7 @@ public class AuthorizationTest {
                 .contentType(JSON)
                 .body(nonePasswordData)
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
                 .then()
                 .log().status()
                 .log().body()
@@ -76,7 +76,7 @@ public class AuthorizationTest {
                 .contentType(JSON)
                 .body(undefinedUserData)
                 .when()
-                .post("https://reqres.in/api/login")
+                .post("/login")
                 .then()
                 .log().status()
                 .log().body()

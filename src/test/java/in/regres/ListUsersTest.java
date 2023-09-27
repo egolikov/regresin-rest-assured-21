@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-public class ListUsersTest {
+public class ListUsersTest extends BaseTest {
 
     @Test
     void successfulFetchListUsersTest() {
@@ -14,7 +14,7 @@ public class ListUsersTest {
                 .log().uri()
                 .log().method()
                 .when()
-                .get("https://reqres.in/api/users?page=2")
+                .get("/users?page=2")
                 .then()
                 .log().status()
                 .log().body()

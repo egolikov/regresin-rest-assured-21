@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.empty;
 
-public class CreatePersonTest {
+public class CreatePersonTest extends BaseTest {
 
     @Test
     void successfulCreatePersonTest() {
@@ -21,7 +21,7 @@ public class CreatePersonTest {
                 .contentType(JSON)
                 .body(createPersonData)
                 .when()
-                .post("https://reqres.in/api/users")
+                .post("/users")
                 .then()
                 .log().status()
                 .log().body()
@@ -43,7 +43,7 @@ public class CreatePersonTest {
                 .contentType(JSON)
                 .body(noneNameData)
                 .when()
-                .post("https://reqres.in/api/users")
+                .post("/users")
                 .then()
                 .log().status()
                 .log().body()
@@ -64,7 +64,7 @@ public class CreatePersonTest {
                 .contentType(JSON)
                 .body(noneJobData)
                 .when()
-                .post("https://reqres.in/api/users")
+                .post("/users")
                 .then()
                 .log().status()
                 .log().body()

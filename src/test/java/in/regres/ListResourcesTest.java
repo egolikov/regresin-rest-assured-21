@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-public class ListResourcesTest {
+public class ListResourcesTest extends BaseTest {
 
     @Test
     void successfulFetchListResourceTest() {
@@ -14,7 +14,7 @@ public class ListResourcesTest {
                 .log().uri()
                 .log().method()
                 .when()
-                .get("https://reqres.in/api/unknown")
+                .get("/unknown")
                 .then()
                 .log().status()
                 .log().body()
