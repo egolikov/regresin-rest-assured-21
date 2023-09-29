@@ -1,76 +1,84 @@
 package in.regres.tests;
 
+import in.regres.models.CreatePersonBodyModel;
+import in.regres.models.CreatePersonResponseModel;
 import org.junit.jupiter.api.Test;
 
+import static in.regres.specs.CreatePersonSpec.createPersonRequestSpec;
+import static in.regres.specs.CreatePersonSpec.createPersonResponseSpec;
+import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.empty;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CreatePersonTest extends BaseTest {
+public class CreatePersonTest {
 
     @Test
     void successfulCreatePersonTest() {
-        String createPersonData = "{ \"name\": \"morpheus\", \"job\": \"leader\" }";
 
-        given()
-                .log().uri()
-                .log().method()
-                .log().body()
-                .contentType(JSON)
-                .body(createPersonData)
-                .when()
-                .post("/users")
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(201)
-                .body("name", is("morpheus"),
-                        "job", is("leader"),
-                        "id", is(not(empty())),
-                        "createdAt", is(not(empty())));
+        CreatePersonBodyModel createPersonData = new CreatePersonBodyModel();
+        createPersonData.setName("morpheus");
+        createPersonData.setJob("leader");
+
+        CreatePersonResponseModel response = step("Создание сотрудника с Именем и Должностью", () ->
+                given(createPersonRequestSpec)
+                        .body(createPersonData)
+                        .when()
+                        .post("/users")
+                        .then()
+                        .spec(createPersonResponseSpec)
+                        .extract().as(CreatePersonResponseModel.class));
+
+        step("Проверка ответа на запрос об успешном создании сотрудника", () -> {
+            assertEquals("morpheus", response.getName());
+            assertEquals("leader", response.getJob());
+            assertNotNull(response.getId());
+            assertNotNull(response.getCreatedAt());
+        });
     }
 
     @Test
     void createPersonWithOutNameTest() {
-        String noneNameData = "{ \"job\": \"leader\" }";
 
-        given()
-                .log().uri()
-                .log().method()
-                .log().body()
-                .contentType(JSON)
-                .body(noneNameData)
-                .when()
-                .post("/users")
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(201)
-                .body("job", is("leader"),
-                        "id", is(not(empty())),
-                        "createdAt", is(not(empty())));
+        CreatePersonBodyModel noneNameData = new CreatePersonBodyModel();
+        noneNameData.setJob("leader");
+
+        CreatePersonResponseModel response = step("Создание сотрудника без Имени", () ->
+                given(createPersonRequestSpec)
+                        .body(noneNameData)
+                        .when()
+                        .post("/users")
+                        .then()
+                        .spec(createPersonResponseSpec)
+                        .extract().as(CreatePersonResponseModel.class));
+
+        step("Проверка ответа на запрос об успешном создании сотрудника без Имени", () -> {
+            assertNull(response.getName());
+            assertEquals("leader", response.getJob());
+            assertNotNull(response.getId());
+            assertNotNull(response.getCreatedAt());
+        });
     }
 
     @Test
     void createPersonWithOutJobTest() {
-        String noneJobData = "{ \"name\": \"morpheus\" }";
 
-        given()
-                .log().uri()
-                .log().method()
-                .log().body()
-                .contentType(JSON)
-                .body(noneJobData)
-                .when()
-                .post("/users")
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(201)
-                .body("name", is("morpheus"),
-                        "id", is(not(empty())),
-                        "createdAt", is(not(empty())));
+        CreatePersonBodyModel noneJobData = new CreatePersonBodyModel();
+        noneJobData.setName("morpheus");
+
+        CreatePersonResponseModel response = step("Создание сотрудника без Работы", () ->
+                given(createPersonRequestSpec)
+                        .body(noneJobData)
+                        .when()
+                        .post("/users")
+                        .then()
+                        .spec(createPersonResponseSpec)
+                        .extract().as(CreatePersonResponseModel.class));
+
+        step("Проверка ответа на запрос об успешном создании сотрудника без Работы", () -> {
+            assertEquals("morpheus", response.getName());
+            assertNull(response.getJob());
+            assertNotNull(response.getId());
+            assertNotNull(response.getCreatedAt());
+        });
     }
 }
