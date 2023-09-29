@@ -7,7 +7,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.empty;
 
-public class UpdatePersonTest extends BaseTest {
+public class UpdatePersonTest {
 
     @Test
     void successfulUpdatePersonWithPutMethodTest() {

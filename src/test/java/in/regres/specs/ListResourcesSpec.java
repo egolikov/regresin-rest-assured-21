@@ -6,19 +6,21 @@ import io.restassured.specification.ResponseSpecification;
 
 import static in.regres.helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
+import static io.restassured.filter.log.LogDetail.BODY;
 import static io.restassured.filter.log.LogDetail.STATUS;
 
-public class DeletePersonSpec {
+public class ListResourcesSpec {
 
-    public static RequestSpecification deletePersonRequestSpec = with()
+    public static RequestSpecification listResourcesRequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
             .baseUri("https://reqres.in")
             .basePath("/api");
 
-    public static ResponseSpecification deletePersonResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification listResourcesResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
-            .expectStatusCode(204)
+            .log(BODY)
+            .expectStatusCode(200)
             .build();
 }

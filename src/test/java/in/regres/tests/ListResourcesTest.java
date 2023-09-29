@@ -1,60 +1,102 @@
 package in.regres.tests;
 
+import in.regres.models.ListResourcesDataResponseModel;
+import in.regres.models.ListResourcesResponseModel;
+import in.regres.models.ListResourcesSupportResponseModel;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
+import java.util.List;
 
-public class ListResourcesTest extends BaseTest {
+import static in.regres.specs.ListResourcesSpec.listResourcesRequestSpec;
+import static in.regres.specs.ListResourcesSpec.listResourcesResponseSpec;
+import static io.qameta.allure.Allure.step;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+public class ListResourcesTest {
 
     @Test
-    void successfulFetchListResourceTest() {
+    void successfulDeletePersonTest() {
 
-        given()
-                .log().uri()
-                .log().method()
-                .when()
-                .get("/unknown")
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(200)
-                .body("page", is(1),
-                        "per_page", is(6),
-                        "total", is(12),
-                        "total_pages", is(2),
-                        "data[0].id", is(1),
-                        "data[0].name", is("cerulean"),
-                        "data[0].year", is(2000),
-                        "data[0].color", is("#98B2D1"),
-                        "data[0].pantone_value", is("15-4020"),
-                        "data[1].id", is(2),
-                        "data[1].name", is("fuchsia rose"),
-                        "data[1].year", is(2001),
-                        "data[1].color", is("#C74375"),
-                        "data[1].pantone_value", is("17-2031"),
-                        "data[2].id", is(3),
-                        "data[2].name", is("true red"),
-                        "data[2].year", is(2002),
-                        "data[2].color", is("#BF1932"),
-                        "data[2].pantone_value", is("19-1664"),
-                        "data[3].id", is(4),
-                        "data[3].name", is("aqua sky"),
-                        "data[3].year", is(2003),
-                        "data[3].color", is("#7BC4C4"),
-                        "data[3].pantone_value", is("14-4811"),
-                        "data[4].id", is(5),
-                        "data[4].name", is("tigerlily"),
-                        "data[4].year", is(2004),
-                        "data[4].color", is("#E2583E"),
-                        "data[4].pantone_value", is("17-1456"),
-                        "data[5].id", is(6),
-                        "data[5].name", is("blue turquoise"),
-                        "data[5].year", is(2005),
-                        "data[5].color", is("#53B0AE"),
-                        "data[5].pantone_value", is("15-5217"),
-                        "support.url", is("https://reqres.in/#support-heading"),
-                        "support.text", is("To keep ReqRes free, contributions towards server costs are appreciated!")
-                );
+        ListResourcesResponseModel response = step("Получение списка Ресурсов", () ->
+                given()
+                        .spec(listResourcesRequestSpec)
+                        .when()
+                        .get("/unknown") // Замените на фактический путь к API
+                        .then()
+                        .spec(listResourcesResponseSpec)
+                        .extract()
+                        .as(ListResourcesResponseModel.class));
+
+        step("Проверка информации о странице в ответе", () -> {
+            assertEquals(1, response.getPage());
+            assertEquals(6, response.getPer_page());
+            assertEquals(12, response.getTotal());
+            assertEquals(2, response.getTotal_pages());
+        });
+
+        step("Проверка информации о первом объекте в ответе", () -> {
+            List<ListResourcesDataResponseModel> data = response.getData();
+            assertEquals(1, data.get(0).getId());
+            assertEquals("cerulean", data.get(0).getName());
+            assertEquals(2000, data.get(0).getYear());
+            assertEquals("#98B2D1", data.get(0).getColor());
+            assertEquals("15-4020", data.get(0).getPantone_value());
+        });
+
+        step("Проверка информации о втором объекте в ответе", () -> {
+            List<ListResourcesDataResponseModel> data = response.getData();
+            assertEquals(2, data.get(1).getId());
+            assertEquals("fuchsia rose", data.get(1).getName());
+            assertEquals(2001, data.get(1).getYear());
+            assertEquals("#C74375", data.get(1).getColor());
+            assertEquals("17-2031", data.get(1).getPantone_value());
+        });
+
+        step("Проверка информации о третьем объекте в ответе", () -> {
+            List<ListResourcesDataResponseModel> data = response.getData();
+            assertEquals(3, data.get(2).getId());
+            assertEquals("true red", data.get(2).getName());
+            assertEquals(2002, data.get(2).getYear());
+            assertEquals("#BF1932", data.get(2).getColor());
+            assertEquals("19-1664", data.get(2).getPantone_value());
+        });
+
+        step("Проверка информации о четвертом объекте в ответе", () -> {
+            List<ListResourcesDataResponseModel> data = response.getData();
+            assertEquals(4, data.get(3).getId());
+            assertEquals("aqua sky", data.get(3).getName());
+            assertEquals(2003, data.get(3).getYear());
+            assertEquals("#7BC4C4", data.get(3).getColor());
+            assertEquals("14-4811", data.get(3).getPantone_value());
+        });
+
+        step("Проверка информации о пятом объекте в ответе", () -> {
+            List<ListResourcesDataResponseModel> data = response.getData();
+            assertEquals(5, data.get(4).getId());
+            assertEquals("tigerlily", data.get(4).getName());
+            assertEquals(2004, data.get(4).getYear());
+            assertEquals("#E2583E", data.get(4).getColor());
+            assertEquals("17-1456", data.get(4).getPantone_value());
+        });
+
+        step("Проверка информации о шестом объекте в ответе", () -> {
+            List<ListResourcesDataResponseModel> data = response.getData();
+            assertEquals(6, data.get(5).getId());
+            assertEquals("blue turquoise", data.get(5).getName());
+            assertEquals(2005, data.get(5).getYear());
+            assertEquals("#53B0AE", data.get(5).getColor());
+            assertEquals("15-5217", data.get(5).getPantone_value());
+        });
+
+        step("Проверка информации о поддержке в ответе", () -> {
+            ListResourcesSupportResponseModel support = response.getSupport();
+            assertNotNull(support);
+            assertEquals("https://reqres.in/#support-heading", support.getUrl());
+            assertEquals("To keep ReqRes free, contributions towards server costs are appreciated!", support.getText());
+        });
+
+
     }
 }
