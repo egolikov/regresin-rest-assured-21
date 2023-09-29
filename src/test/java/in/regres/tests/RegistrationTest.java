@@ -1,4 +1,4 @@
-package in.regres;
+package in.regres.tests;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,30 +6,31 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class AuthorizationTest extends BaseTest {
+public class RegistrationTest extends BaseTest {
 
     @Test
-    void successfulAuthorizationTest() {
-        String authData = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"cityslicka\" }";
+    void successfulRegistrationTest() {
+        String regData = "{ \"email\": \"eve.holt@reqres.in\", \"password\": \"pistol\" }";
 
         given()
                 .log().uri()
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .body(authData)
+                .body(regData)
                 .when()
-                .post("/login")
+                .post("/register")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("token", is("QpwL5tke4Pnpja7X4"));
+                .body("id", is(4),
+                        "token", is("QpwL5tke4Pnpja7X4"));
     }
 
     @Test
-    void authorizationWithOutEmailTest() {
-        String noneEmailData = "{ \"password\": \"cityslicka\" }";
+    void registrationWithOutEmailTest() {
+        String noneEmailData = "{ \"password\": \"pistol\" }";
 
         given()
                 .log().uri()
@@ -38,7 +39,7 @@ public class AuthorizationTest extends BaseTest {
                 .contentType(JSON)
                 .body(noneEmailData)
                 .when()
-                .post("/login")
+                .post("/register")
                 .then()
                 .log().status()
                 .log().body()
@@ -47,7 +48,7 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
-    void authorizationWithOutPasswordTest() {
+    void registrationWithOutPasswordTest() {
         String nonePasswordData = "{ \"email\": \"eve.holt@reqres.in\" }";
 
         given()
@@ -57,7 +58,7 @@ public class AuthorizationTest extends BaseTest {
                 .contentType(JSON)
                 .body(nonePasswordData)
                 .when()
-                .post("/login")
+                .post("/register")
                 .then()
                 .log().status()
                 .log().body()
@@ -66,7 +67,7 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
-    void undefinedUserAuthorizationTest() {
+    void undefinedUserRegistrationTest() {
         String undefinedUserData = "{ \"email\": \"egolikov@gmail.com\", \"password\": \"gogogo\" }";
 
         given()
@@ -76,11 +77,11 @@ public class AuthorizationTest extends BaseTest {
                 .contentType(JSON)
                 .body(undefinedUserData)
                 .when()
-                .post("/login")
+                .post("/register")
                 .then()
                 .log().status()
                 .log().body()
                 .statusCode(400)
-                .body("error", is("user not found"));
+                .body("error", is("Note: Only defined users succeed registration"));
     }
 }
