@@ -22,7 +22,7 @@ public class RegistrationSpec {
             .log().method()
             .log().body()
             .contentType(JSON)
-            .baseUri(config.baseApiUri())
+            .baseUri(config.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification registrationResponseSpec = new ResponseSpecBuilder()

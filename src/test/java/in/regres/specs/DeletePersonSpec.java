@@ -18,7 +18,7 @@ public class DeletePersonSpec {
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
-            .baseUri(config.baseApiUri())
+            .baseUri(config.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification deletePersonResponseSpec = new ResponseSpecBuilder()

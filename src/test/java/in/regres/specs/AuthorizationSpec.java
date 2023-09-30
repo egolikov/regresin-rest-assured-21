@@ -22,7 +22,7 @@ public class AuthorizationSpec {
             .log().method()
             .log().body()
             .contentType(JSON)
-            .baseUri(config.baseApiUri())
+            .baseUri(config.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification authorizationResponseSpec = new ResponseSpecBuilder()

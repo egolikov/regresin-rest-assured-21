@@ -19,7 +19,7 @@ public class ListUsersSpec {
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
-            .baseUri(config.baseApiUri())
+            .baseUri(config.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification listUsersResponseSpec = new ResponseSpecBuilder()
