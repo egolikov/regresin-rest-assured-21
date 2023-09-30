@@ -1,5 +1,7 @@
 package in.regres.models;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -8,5 +10,6 @@ public class ListResourcesDataResponseModel {
     String name;
     int year;
     String color;
-    String pantone_value;
+    @JsonProperty("pantone_value")
+    String pantoneValue;
 }

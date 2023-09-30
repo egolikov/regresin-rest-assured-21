@@ -1,5 +1,6 @@
 package in.regres.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -7,9 +8,11 @@ import java.util.List;
 @Data
 public class ListUsersResponseModel {
     int page;
-    int per_page;
+    @JsonProperty("per_page")
+    int perPage;
     int total;
-    int total_pages;
+    @JsonProperty("total_pages")
+    int totalPages;
     List<ListUsersDataResponseModel> data;
     ListUsersSupportResponseModel support;
 }

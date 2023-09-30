@@ -18,7 +18,7 @@ public class ListResourcesTest {
 
     @Test
     @DisplayName("Проверка успешного получения списка ресурсов")
-    void successfulDeletePersonTest() {
+    void successfulFetchListResources() {
 
         ListResourcesResponseModel response = step("Получение списка Ресурсов", () ->
                 given()
@@ -32,9 +32,9 @@ public class ListResourcesTest {
 
         step("Проверка информации о странице в ответе", () -> {
             assertEquals(1, response.getPage());
-            assertEquals(6, response.getPer_page());
+            assertEquals(6, response.getPerPage());
             assertEquals(12, response.getTotal());
-            assertEquals(2, response.getTotal_pages());
+            assertEquals(2, response.getTotalPages());
         });
 
         step("Проверка информации о первом объекте в ответе", () -> {
@@ -43,7 +43,7 @@ public class ListResourcesTest {
             assertEquals("cerulean", data.get(0).getName());
             assertEquals(2000, data.get(0).getYear());
             assertEquals("#98B2D1", data.get(0).getColor());
-            assertEquals("15-4020", data.get(0).getPantone_value());
+            assertEquals("15-4020", data.get(0).getPantoneValue());
         });
 
         step("Проверка информации о втором объекте в ответе", () -> {
@@ -52,7 +52,7 @@ public class ListResourcesTest {
             assertEquals("fuchsia rose", data.get(1).getName());
             assertEquals(2001, data.get(1).getYear());
             assertEquals("#C74375", data.get(1).getColor());
-            assertEquals("17-2031", data.get(1).getPantone_value());
+            assertEquals("17-2031", data.get(1).getPantoneValue());
         });
 
         step("Проверка информации о третьем объекте в ответе", () -> {
@@ -61,7 +61,7 @@ public class ListResourcesTest {
             assertEquals("true red", data.get(2).getName());
             assertEquals(2002, data.get(2).getYear());
             assertEquals("#BF1932", data.get(2).getColor());
-            assertEquals("19-1664", data.get(2).getPantone_value());
+            assertEquals("19-1664", data.get(2).getPantoneValue());
         });
 
         step("Проверка информации о четвертом объекте в ответе", () -> {
@@ -70,7 +70,7 @@ public class ListResourcesTest {
             assertEquals("aqua sky", data.get(3).getName());
             assertEquals(2003, data.get(3).getYear());
             assertEquals("#7BC4C4", data.get(3).getColor());
-            assertEquals("14-4811", data.get(3).getPantone_value());
+            assertEquals("14-4811", data.get(3).getPantoneValue());
         });
 
         step("Проверка информации о пятом объекте в ответе", () -> {
@@ -79,7 +79,7 @@ public class ListResourcesTest {
             assertEquals("tigerlily", data.get(4).getName());
             assertEquals(2004, data.get(4).getYear());
             assertEquals("#E2583E", data.get(4).getColor());
-            assertEquals("17-1456", data.get(4).getPantone_value());
+            assertEquals("17-1456", data.get(4).getPantoneValue());
         });
 
         step("Проверка информации о шестом объекте в ответе", () -> {
@@ -88,7 +88,7 @@ public class ListResourcesTest {
             assertEquals("blue turquoise", data.get(5).getName());
             assertEquals(2005, data.get(5).getYear());
             assertEquals("#53B0AE", data.get(5).getColor());
-            assertEquals("15-5217", data.get(5).getPantone_value());
+            assertEquals("15-5217", data.get(5).getPantoneValue());
         });
 
         step("Проверка информации о поддержке в ответе", () -> {
