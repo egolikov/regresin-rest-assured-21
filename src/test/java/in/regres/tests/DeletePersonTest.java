@@ -1,5 +1,6 @@
 package in.regres.tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static in.regres.specs.DeletePersonSpec.deletePersonRequestSpec;
@@ -10,6 +11,7 @@ import static io.restassured.RestAssured.given;
 public class DeletePersonTest {
 
     @Test
+    @DisplayName("Проверка успешного удаления сотрудника")
     void successfulDeletePersonTest() {
 
         step("Удаление сотрудника", () -> {

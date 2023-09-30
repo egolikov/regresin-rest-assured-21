@@ -3,6 +3,7 @@ package in.regres.tests;
 import in.regres.models.AuthorizationBodyModel;
 import in.regres.models.AuthorizationErrorModel;
 import in.regres.models.AuthorizationResponseModel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static in.regres.specs.AuthorizationSpec.*;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AuthorizationTest {
 
     @Test
+    @DisplayName("Проверка успешной авторизации с Email и Password")
     void successfulAuthorizationTest() {
 
         AuthorizationBodyModel authData = new AuthorizationBodyModel();
@@ -33,6 +35,7 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Проверка неуспешной авторизации без Email")
     void authorizationWithOutEmailTest() {
 
         AuthorizationBodyModel noneEmailData = new AuthorizationBodyModel();
@@ -52,6 +55,7 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Проверка неуспешной авторизации без Password")
     void authorizationWithOutPasswordTest() {
 
         AuthorizationBodyModel nonePasswordData = new AuthorizationBodyModel();
@@ -71,6 +75,7 @@ public class AuthorizationTest {
     }
 
     @Test
+    @DisplayName("Проверка неуспешной авторизации с данными неизвестного пользователя")
     void undefinedUserAuthorizationTest() {
 
         AuthorizationBodyModel undefinedUserData = new AuthorizationBodyModel();

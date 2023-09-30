@@ -2,6 +2,7 @@ package in.regres.tests;
 
 import in.regres.models.CreatePersonBodyModel;
 import in.regres.models.CreatePersonResponseModel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static in.regres.specs.CreatePersonSpec.createPersonRequestSpec;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CreatePersonTest {
 
     @Test
+    @DisplayName("Проверка успешного создания сотрудника с Name и Job")
     void successfulCreatePersonTest() {
 
         CreatePersonBodyModel createPersonData = new CreatePersonBodyModel();
@@ -37,6 +39,7 @@ public class CreatePersonTest {
     }
 
     @Test
+    @DisplayName("Проверка успешного создания сотрудника без Name")
     void createPersonWithOutNameTest() {
 
         CreatePersonBodyModel noneNameData = new CreatePersonBodyModel();
@@ -60,6 +63,7 @@ public class CreatePersonTest {
     }
 
     @Test
+    @DisplayName("Проверка успешного создания сотрудника без Job")
     void createPersonWithOutJobTest() {
 
         CreatePersonBodyModel noneJobData = new CreatePersonBodyModel();

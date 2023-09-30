@@ -2,6 +2,7 @@ package in.regres.tests;
 
 import in.regres.models.UpdatePersonBodyModel;
 import in.regres.models.UpdatePersonResponseModel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static in.regres.specs.UpdatePersonSpec.updatePersonRequestSpec;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class UpdatePersonTest {
 
     @Test
+    @DisplayName("Проверка успешного обновления данных пользователя через метод PUT")
     void successfulUpdatePersonWithPutMethodTest() {
 
         UpdatePersonBodyModel updatePersonData = new UpdatePersonBodyModel();
@@ -37,6 +39,7 @@ public class UpdatePersonTest {
     }
 
     @Test
+    @DisplayName("Проверка успешного обновления данных пользователя через метод PATCH")
     void successfulUpdatePersonWithPatchMethodTest() {
 
         UpdatePersonBodyModel updatePersonData = new UpdatePersonBodyModel();

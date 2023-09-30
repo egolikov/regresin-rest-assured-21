@@ -1,6 +1,7 @@
 package in.regres.tests;
 
 import in.regres.models.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ListUsersTest {
 
     @Test
+    @DisplayName("Проверка успешного получения списка сотрудников")
     void successfulFetchListUsersTest() {
 
         ListUsersResponseModel response = step("", () ->

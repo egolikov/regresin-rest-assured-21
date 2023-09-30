@@ -3,6 +3,7 @@ package in.regres.tests;
 import in.regres.models.RegistrationBodyModel;
 import in.regres.models.RegistrationErrorModel;
 import in.regres.models.RegistrationResponseModel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static in.regres.specs.RegistrationSpec.*;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegistrationTest {
 
+    @DisplayName("Проверка успешной регистрации с Email и Password")
     @Test
     void successfulRegistrationTest() {
 
@@ -35,6 +37,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Проверка неспешной регистрации без Email")
     void registrationWithOutEmailTest() {
 
         RegistrationBodyModel noneEmailData = new RegistrationBodyModel();
@@ -55,6 +58,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Проверка неспешной регистрации без Password")
     void registrationWithOutPasswordTest() {
 
         RegistrationBodyModel nonePasswordData = new RegistrationBodyModel();
@@ -75,6 +79,7 @@ public class RegistrationTest {
     }
 
     @Test
+    @DisplayName("Проверка неуспешной регистрации с данными неизвестного пользователя")
     void undefinedUserRegistrationTest() {
 
         RegistrationBodyModel undefinedUserData = new RegistrationBodyModel();

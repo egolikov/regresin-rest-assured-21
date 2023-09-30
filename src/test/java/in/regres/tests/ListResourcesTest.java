@@ -3,6 +3,7 @@ package in.regres.tests;
 import in.regres.models.ListResourcesDataResponseModel;
 import in.regres.models.ListResourcesResponseModel;
 import in.regres.models.ListResourcesSupportResponseModel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ListResourcesTest {
 
     @Test
+    @DisplayName("Проверка успешного получения списка ресурсов")
     void successfulDeletePersonTest() {
 
         ListResourcesResponseModel response = step("Получение списка Ресурсов", () ->
