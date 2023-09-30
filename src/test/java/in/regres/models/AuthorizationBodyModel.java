@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class AuthorizationBodyModel {
-    String email, password;
+    String email;
+    String password;
 }
