@@ -12,7 +12,6 @@ import static in.regres.specs.ListResourcesSpec.listResourcesResponseSpec;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ListResourcesTest {
 
@@ -23,7 +22,7 @@ public class ListResourcesTest {
                 given()
                         .spec(listResourcesRequestSpec)
                         .when()
-                        .get("/unknown") // Замените на фактический путь к API
+                        .get("/unknown")
                         .then()
                         .spec(listResourcesResponseSpec)
                         .extract()
@@ -92,7 +91,6 @@ public class ListResourcesTest {
 
         step("Проверка информации о поддержке в ответе", () -> {
             ListResourcesSupportResponseModel support = response.getSupport();
-            assertNotNull(support);
             assertEquals("https://reqres.in/#support-heading", support.getUrl());
             assertEquals("To keep ReqRes free, contributions towards server costs are appreciated!", support.getText());
         });
