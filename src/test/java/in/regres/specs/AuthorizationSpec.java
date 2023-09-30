@@ -14,7 +14,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class AuthorizationSpec {
 
-    private static final ApiConfig config = ConfigFactory.create(ApiConfig.class);
+    private static final ApiConfig CONFIG = ConfigFactory.create(ApiConfig.class);
 
     public static RequestSpecification authorizationRequestSpec = with()
             .filter(withCustomTemplates())
@@ -22,7 +22,7 @@ public class AuthorizationSpec {
             .log().method()
             .log().body()
             .contentType(JSON)
-            .baseUri(config.baseApiUrl())
+            .baseUri(CONFIG.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification authorizationResponseSpec = new ResponseSpecBuilder()

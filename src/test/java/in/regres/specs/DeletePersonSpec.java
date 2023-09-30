@@ -12,13 +12,13 @@ import static io.restassured.filter.log.LogDetail.STATUS;
 
 public class DeletePersonSpec {
 
-    private static final ApiConfig config = ConfigFactory.create(ApiConfig.class);
+    private static final ApiConfig CONFIG = ConfigFactory.create(ApiConfig.class);
 
     public static RequestSpecification deletePersonRequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
-            .baseUri(config.baseApiUrl())
+            .baseUri(CONFIG.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification deletePersonResponseSpec = new ResponseSpecBuilder()

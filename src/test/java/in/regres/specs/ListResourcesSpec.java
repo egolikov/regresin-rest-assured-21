@@ -13,13 +13,13 @@ import static io.restassured.filter.log.LogDetail.STATUS;
 
 public class ListResourcesSpec {
 
-    private static final ApiConfig config = ConfigFactory.create(ApiConfig.class);
+    private static final ApiConfig CONFIG = ConfigFactory.create(ApiConfig.class);
 
     public static RequestSpecification listResourcesRequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
-            .baseUri(config.baseApiUrl())
+            .baseUri(CONFIG.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification listResourcesResponseSpec = new ResponseSpecBuilder()

@@ -14,7 +14,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class UpdatePersonSpec {
 
-    private static final ApiConfig config = ConfigFactory.create(ApiConfig.class);
+    private static final ApiConfig CONFIG = ConfigFactory.create(ApiConfig.class);
 
     public static RequestSpecification updatePersonRequestSpec = with()
             .filter(withCustomTemplates())
@@ -22,7 +22,7 @@ public class UpdatePersonSpec {
             .log().method()
             .log().body()
             .contentType(JSON)
-            .baseUri(config.baseApiUrl())
+            .baseUri(CONFIG.baseApiUrl())
             .basePath("/api");
 
     public static ResponseSpecification updatePersonResponseSpec = new ResponseSpecBuilder()
